@@ -13,6 +13,7 @@
 # This script needs to be run on a linux system or a WSL distro with:
 # 1. A singularity installation
 # 2. Availability of sqfs2tar (should be a prerequisite of #1)
+#    In Ubuntu 22.04, sudo apt install squashfs-tools-ng
 # ---------------------------------------------------------------------
 
 TEMP_FOLDER="/mnt/f/temp"
@@ -30,7 +31,7 @@ singularity sif list /path/to/container-image.sif
 
 # Dump disk envvars and data (here assuming blocks 2&3 respectively)
 mkdir -p $TEMP_FOLDER
-singularity sif dump 2 > $TEMP_FOLDER/env-vars.txt
+singularity sif dump 2 /path/to/container-image.sif > $TEMP_FOLDER/env-vars.txt
 singularity sif dump 3 /path/to/container-image.sif > $TEMP_FOLDER/data.squash
 
 # Convert the squash to a tar.gz
